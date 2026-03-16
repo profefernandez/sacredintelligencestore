@@ -20,3 +20,20 @@ export function isPhysicalProduct(type: ProductType): boolean {
 export function isDigitalProduct(type: ProductType): boolean {
   return !isPhysicalProduct(type);
 }
+
+export const typeLabels: Record<ProductType, string> = {
+  book: "Book",
+  album: "Album",
+  document: "Document",
+  merchandise: "Merchandise",
+  workshop: "Workshop",
+  video: "Video",
+};
+
+export function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}

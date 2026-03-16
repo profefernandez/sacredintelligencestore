@@ -18,6 +18,37 @@ const brand = {
   darkPurple: "#2d1854",
 } as const;
 
+// Pillar identity colors — used for small decorative indicators only
+export const pillarColors = {
+  sacred: "#7c5cbf",   // muted purple
+  selfish: "#bf5c7c",  // muted rose
+  shared: "#5c9fbf",   // muted teal
+} as const;
+
+// Shadows — contextual depth tokens
+export const shadows = {
+  light: {
+    shelf: "0 8px 32px rgba(0,0,0,0.1)",
+    shelfHover: "0 12px 40px rgba(0,0,0,0.15)",
+    product: "0 16px 48px rgba(0,0,0,0.12)",
+  },
+  dark: {
+    shelf: "0 8px 32px rgba(0,0,0,0.5)",
+    shelfHover: "0 12px 40px rgba(0,0,0,0.6)",
+    product: "0 16px 48px rgba(0,0,0,0.5)",
+  },
+} as const;
+
+// Subtle tinted overlays for active/selected states
+export const overlays = {
+  light: {
+    goldSubtle: "rgba(97, 79, 29, 0.06)",
+  },
+  dark: {
+    goldSubtle: "rgba(201, 168, 76, 0.1)",
+  },
+} as const;
+
 const light = {
   // Backgrounds
   bgPrimary: "#f5f0e8",       // cream

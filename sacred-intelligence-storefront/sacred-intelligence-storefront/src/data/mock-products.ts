@@ -197,6 +197,7 @@ export const mockProducts: Product[] = [
     product_type: "workshop",
     pillar_tag: "sacred",
     stripe_price_id: "price_placeholder_workshop_healing",
+    presenter_name: "Rev. Dr. Terrlyn L. Curry Avery",
     presenter_image: {
       id: "img-drtlc",
       url: "/images/dr-tlc-presenter.jpg",

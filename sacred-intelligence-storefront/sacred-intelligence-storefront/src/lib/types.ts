@@ -18,6 +18,7 @@ export interface Product {
   pillar_tag: PillarTag;
   stripe_price_id: string;
   preview_content?: string;
+  presenter_name?: string;
   presenter_image?: ProductImage;
   featured: boolean;
   status: ProductStatus;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { MotionProvider } from "@/components/layout/MotionProvider";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -38,12 +39,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <SkipLink />
-          <Header />
-          <main id="main-content">
-            {children}
-          </main>
-          <Footer />
+          <MotionProvider>
+            <SkipLink />
+            <Header />
+            <main id="main-content">
+              {children}
+            </main>
+            <Footer />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

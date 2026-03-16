@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ShoppingBag } from "lucide-react";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
+import { useCartStore } from "@/store/useCartStore";
 
 const navLinks = [
   { href: "/shop", label: "Shop" },
@@ -11,6 +12,9 @@ const navLinks = [
 ];
 
 export function Header() {
+  const totalItems = useCartStore((s) =>
+    s.items.reduce((sum, item) => sum + item.quantity, 0)
+  );
   return (
     <header
       role="banner"
@@ -82,7 +86,7 @@ export function Header() {
           {/* Cart */}
           <Link
             href="/cart"
-            aria-label="Shopping cart, 0 items"
+            aria-label={`Shopping cart, ${totalItems} ${totalItems === 1 ? "item" : "items"}`}
             style={{
               display: "flex",
               alignItems: "center",
@@ -100,8 +104,8 @@ export function Header() {
                 position: "absolute",
                 top: "8px",
                 right: "4px",
-                backgroundColor: "var(--accent-gold-decorative)",
-                color: "var(--bg-primary)",
+                backgroundColor: "var(--cta-primary-bg)",
+                color: "var(--cta-primary-text)",
                 fontSize: "0.65rem",
                 fontWeight: 700,
                 width: "18px",
@@ -112,7 +116,7 @@ export function Header() {
                 justifyContent: "center",
               }}
             >
-              0
+              {totalItems}
             </span>
           </Link>
         </nav>
