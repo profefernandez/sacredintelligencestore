@@ -1,37 +1,24 @@
+import { colors, typography, spacing } from "@/lib/design-system";
+
 export default function Home() {
   return (
     <section
+      className={`${spacing.section} ${spacing.pageX} flex flex-col items-center justify-center text-center`}
       style={{
         minHeight: "calc(100vh - 72px)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "clamp(1.5rem, 5vw, 4rem)",
         marginTop: "72px",
-        textAlign: "center",
+        backgroundColor: colors.bg.primary,
       }}
     >
       <h1
-        style={{
-          fontFamily: "var(--font-playfair), 'Playfair Display', serif",
-          fontSize: "clamp(3rem, 5vw, 4.5rem)",
-          fontWeight: 700,
-          lineHeight: 1.1,
-          letterSpacing: "-0.02em",
-          color: "var(--text-primary)",
-          marginBottom: "1.5rem",
-        }}
+        className={`${typography.h1} ${spacing.headingMb}`}
+        style={{ color: colors.text.heading }}
       >
         Sacred Intelligence Collection
       </h1>
       <p
-        style={{
-          fontSize: "1.15rem",
-          lineHeight: 1.7,
-          color: "var(--text-body)",
-          maxWidth: "36rem",
-        }}
+        className={`${typography.bodyLg} max-w-xl`}
+        style={{ color: colors.text.body }}
       >
         Books, guided meditations, and digital resources for your Sacred,
         Self-ish, and Shared journeys. Coming soon.

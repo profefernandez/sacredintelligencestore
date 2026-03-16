@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "@/components/layout/ThemeProvider";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Divider } from "@/components/ui/Divider";
@@ -12,41 +11,23 @@ import { formatDate } from "@/lib/utils";
 import { colors, typography, spacing, animation, radius } from "@/lib/design-system";
 
 export function BlogContent() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const published = mockBlogPosts.filter((p) => p.status === "published");
 
   return (
     <div style={{ marginTop: "72px" }}>
       {/* Hero */}
       <Section index={0}>
-        <div
-          style={{
-            textAlign: "center",
-            maxWidth: spacing.maxTextWidth,
-            margin: "0 auto",
-          }}
-        >
+        <div className={`${spacing.maxWidthNarrow} text-center`}>
           <SectionLabel>Writings</SectionLabel>
           <h1
-            style={{
-              ...typography.h1,
-              color: isDark
-                ? colors.dark.textPrimary
-                : colors.light.textPrimary,
-              marginTop: "1rem",
-              marginBottom: "1.5rem",
-            }}
+            className={`${typography.h1} ${spacing.headingMb}`}
+            style={{ color: colors.text.heading }}
           >
             From the Desk of Dr. TLC
           </h1>
           <p
-            style={{
-              ...typography.bodyLg,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              maxWidth: "36rem",
-              margin: "0 auto",
-            }}
+            className={`${typography.bodyLg} max-w-xl mx-auto`}
+            style={{ color: colors.text.body }}
           >
             Reflections on healing, wholeness, and the Sacred Intelligence
             journey.
@@ -56,7 +37,7 @@ export function BlogContent() {
 
       {/* Posts */}
       <Section index={1}>
-        <div style={{ maxWidth: spacing.maxTextWidth, margin: "0 auto" }}>
+        <div className={spacing.maxWidthNarrow}>
           {published.map((post, i) => (
             <motion.article
               key={post.id}
@@ -70,25 +51,16 @@ export function BlogContent() {
             >
               <Link
                 href={`/blog/${post.slug}`}
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  display: "block",
-                }}
+                className="no-underline block"
+                style={{ color: "inherit" }}
               >
-                {/* Cover image */}
                 {post.cover_image && (
                   <div
+                    className="relative w-full mb-6 overflow-hidden"
                     style={{
-                      position: "relative",
-                      width: "100%",
                       aspectRatio: "16/9",
-                      borderRadius: radius.md,
-                      overflow: "hidden",
-                      marginBottom: "1.5rem",
-                      backgroundColor: isDark
-                        ? colors.dark.bgSecondary
-                        : colors.light.bgSecondary,
+                      borderRadius: radius.card,
+                      backgroundColor: colors.bg.secondary,
                     }}
                   >
                     <Image
@@ -101,76 +73,39 @@ export function BlogContent() {
                   </div>
                 )}
 
-                {/* Category + date */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                    marginBottom: "0.75rem",
-                  }}
-                >
+                <div className="flex items-center gap-4 mb-3">
                   <span
-                    style={{
-                      ...typography.label,
-                      fontSize: "0.7rem",
-                      color: isDark
-                        ? colors.dark.accentGold
-                        : colors.light.accentGoldText,
-                    }}
+                    className={typography.label}
+                    style={{ color: colors.text.gold, fontSize: "0.7rem" }}
                   >
                     {post.category}
                   </span>
-                  <span
-                    style={{
-                      ...typography.body,
-                      fontSize: "0.85rem",
-                      color: isDark
-                        ? colors.dark.textBody
-                        : colors.light.textBody,
-                      opacity: 0.6,
-                    }}
+                  <time
+                    dateTime={post.published_date}
+                    className={typography.bodySm}
+                    style={{ color: colors.text.muted }}
                   >
                     {formatDate(post.published_date)}
-                  </span>
+                  </time>
                 </div>
 
-                {/* Title */}
                 <h2
-                  style={{
-                    ...typography.h3,
-                    color: isDark
-                      ? colors.dark.textPrimary
-                      : colors.light.textPrimary,
-                    marginBottom: "0.75rem",
-                    transition: "color 0.2s",
-                  }}
+                  className={`${typography.h3} mb-3`}
+                  style={{ color: colors.text.heading }}
                 >
                   {post.title}
                 </h2>
 
-                {/* Excerpt */}
                 <p
-                  style={{
-                    ...typography.body,
-                    color: isDark
-                      ? colors.dark.textBody
-                      : colors.light.textBody,
-                    marginBottom: "1rem",
-                  }}
+                  className={`${typography.body} mb-4`}
+                  style={{ color: colors.text.body }}
                 >
                   {post.excerpt}
                 </p>
 
-                {/* Read more */}
                 <span
-                  style={{
-                    ...typography.label,
-                    fontSize: "0.75rem",
-                    color: isDark
-                      ? colors.dark.accentGold
-                      : colors.light.accentGoldText,
-                  }}
+                  className={typography.label}
+                  style={{ color: colors.text.gold, fontSize: "0.75rem" }}
                 >
                   Read More &rarr;
                 </span>

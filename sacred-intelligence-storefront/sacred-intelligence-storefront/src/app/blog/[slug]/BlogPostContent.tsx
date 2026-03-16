@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import sanitizeHtml from "sanitize-html";
 import { ArrowLeft } from "lucide-react";
-import { useTheme } from "@/components/layout/ThemeProvider";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Divider } from "@/components/ui/Divider";
@@ -14,9 +13,6 @@ import { colors, typography, spacing, animation, radius } from "@/lib/design-sys
 import type { BlogPost } from "@/lib/types";
 
 export function BlogPostContent({ post }: { post: BlogPost }) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   // Developer-approved use of dangerouslySetInnerHTML for CMS blog content.
   // All HTML is sanitized via sanitize-html before rendering.
   const cleanBody = sanitizeHtml(post.body, {
@@ -31,20 +27,13 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
   return (
     <div style={{ marginTop: "72px" }}>
       <Section index={0}>
-        <div style={{ maxWidth: spacing.maxTextWidth, margin: "0 auto" }}>
+        <div className={spacing.maxWidthNarrow}>
           {/* Back link */}
-          <motion.div {...animation.fadeIn} style={{ marginBottom: "2rem" }}>
+          <motion.div {...animation.fadeIn} className="mb-8">
             <Link
               href="/blog"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                color: isDark ? colors.dark.textBody : colors.light.textBody,
-                textDecoration: "none",
-                fontSize: "0.95rem",
-                minHeight: spacing.touchTarget,
-              }}
+              className={`inline-flex items-center gap-2 no-underline min-h-[48px] ${typography.bodySm}`}
+              style={{ color: colors.text.muted }}
             >
               <ArrowLeft size={16} />
               Back to Blog
@@ -58,51 +47,27 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
               animate={animation.fadeUp.animate}
               transition={animation.fadeUp.transition}
             >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  marginBottom: "1rem",
-                }}
-              >
-                <SectionLabel>{post.category}</SectionLabel>
-                <span
-                  style={{
-                    ...typography.body,
-                    fontSize: "0.85rem",
-                    color: isDark
-                      ? colors.dark.textBody
-                      : colors.light.textBody,
-                    opacity: 0.6,
-                  }}
+              <div className="flex items-center gap-4 mb-4">
+                <SectionLabel className="mb-0">{post.category}</SectionLabel>
+                <time
+                  dateTime={post.published_date}
+                  className={typography.bodySm}
+                  style={{ color: colors.text.muted }}
                 >
                   {formatDate(post.published_date)}
-                </span>
+                </time>
               </div>
 
               <h1
-                style={{
-                  ...typography.h1,
-                  fontSize: "clamp(2rem, 4vw, 3.5rem)",
-                  color: isDark
-                    ? colors.dark.textPrimary
-                    : colors.light.textPrimary,
-                  marginBottom: "1rem",
-                }}
+                className={`${typography.h1} ${spacing.headingMb}`}
+                style={{ color: colors.text.heading, fontSize: "clamp(2rem, 4vw, 3.5rem)" }}
               >
                 {post.title}
               </h1>
 
               <p
-                style={{
-                  ...typography.body,
-                  fontSize: "0.95rem",
-                  color: isDark
-                    ? colors.dark.textBody
-                    : colors.light.textBody,
-                  marginBottom: "2rem",
-                }}
+                className={`${typography.bodySm} ${spacing.bodyMb}`}
+                style={{ color: colors.text.muted }}
               >
                 By {post.author}
               </p>
@@ -114,16 +79,11 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
                 initial={animation.fadeIn.initial}
                 animate={animation.fadeIn.animate}
                 transition={{ ...animation.fadeIn.transition, delay: 0.2 }}
+                className="relative w-full mb-10 overflow-hidden"
                 style={{
-                  position: "relative",
-                  width: "100%",
                   aspectRatio: "16/9",
-                  borderRadius: radius.lg,
-                  overflow: "hidden",
-                  marginBottom: "2.5rem",
-                  backgroundColor: isDark
-                    ? colors.dark.bgSecondary
-                    : colors.light.bgSecondary,
+                  borderRadius: radius.card,
+                  backgroundColor: colors.bg.secondary,
                 }}
               >
                 <Image
@@ -139,54 +99,18 @@ export function BlogPostContent({ post }: { post: BlogPost }) {
 
             <Divider />
 
-            {/* Body */}
+            {/* Body — styles defined in globals.css .blog-body */}
             <motion.div
               initial={animation.fadeUp.initial}
               animate={animation.fadeUp.animate}
               transition={{ ...animation.fadeUp.transition, delay: 0.3 }}
               dangerouslySetInnerHTML={{ __html: cleanBody }}
-              style={{
-                ...typography.body,
-                color: isDark ? colors.dark.textBody : colors.light.textBody,
-                marginTop: "2rem",
-              }}
-              className="blog-body"
+              className={`blog-body ${typography.body} mt-8`}
+              style={{ color: colors.text.body }}
             />
           </article>
         </div>
       </Section>
-
-      {/* Blog body typography styles — uses CSS custom properties set by ThemeProvider */}
-      <style>{`
-        .blog-body h2 {
-          font-family: var(--font-playfair), 'Playfair Display', serif;
-          font-size: clamp(1.5rem, 2.5vw, 2rem);
-          font-weight: 600;
-          line-height: 1.2;
-          color: var(--text-primary);
-          margin-top: 2.5rem;
-          margin-bottom: 1rem;
-        }
-        .blog-body h3 {
-          font-family: var(--font-playfair), 'Playfair Display', serif;
-          font-size: clamp(1.2rem, 2vw, 1.5rem);
-          font-weight: 600;
-          line-height: 1.25;
-          color: var(--text-primary);
-          margin-top: 2rem;
-          margin-bottom: 0.75rem;
-        }
-        .blog-body p {
-          margin-bottom: 1.25rem;
-        }
-        .blog-body strong {
-          color: var(--text-primary);
-          font-weight: 600;
-        }
-        .blog-body em {
-          color: var(--accent-gold-text);
-        }
-      `}</style>
     </div>
   );
 }

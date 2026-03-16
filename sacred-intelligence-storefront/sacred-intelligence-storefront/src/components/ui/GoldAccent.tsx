@@ -1,25 +1,17 @@
 "use client";
 
 import { colors } from "@/lib/design-system";
-import { useTheme } from "@/components/layout/ThemeProvider";
 
 interface GoldAccentProps {
   children: React.ReactNode;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-export function GoldAccent({ children, style }: GoldAccentProps) {
-  const { theme } = useTheme();
-  const color =
-    theme === "dark" ? colors.dark.accentGold : colors.light.accentGoldText;
-
+export function GoldAccent({ children, className = "" }: GoldAccentProps) {
   return (
     <span
-      style={{
-        color,
-        fontStyle: "italic",
-        ...style,
-      }}
+      className={`font-serif italic ${className}`}
+      style={{ color: colors.gold.primary }}
     >
       {children}
     </span>

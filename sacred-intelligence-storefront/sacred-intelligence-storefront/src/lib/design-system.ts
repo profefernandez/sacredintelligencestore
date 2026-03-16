@@ -1,209 +1,123 @@
 /**
- * Design System Tokens — Sacred Intelligence Storefront
+ * Design System Tokens — Sacred Intelligence Collection Storefront
  *
  * Single source of truth for all visual constants.
  * Every component imports from this file. NO hardcoded hex values elsewhere.
  *
- * Accessibility: All text colors meet WCAG AAA contrast ratios (7:1+).
- * Gold decorative (#c9a84c) is ONLY for borders/icons — use accentGoldText for text.
+ * Matches: docs/brand-guidelines.md
+ *
+ * Theme: Dark-only. Three rotating backgrounds.
+ * Typography: Playfair Display (serif headings) + Inter (sans body).
+ * Accessibility: All text colors meet WCAG AAA (7:1+) against all three backgrounds.
  */
 
 // ---------------------------------------------------------------------------
 // Colors
 // ---------------------------------------------------------------------------
 
-const brand = {
-  gold: "#c9a84c",
-  deepPurple: "#1a0a2e",
-  darkPurple: "#2d1854",
-} as const;
-
-// Pillar identity colors — used for small decorative indicators only
-export const pillarColors = {
-  sacred: "#7c5cbf",   // muted purple
-  selfish: "#bf5c7c",  // muted rose
-  shared: "#5c9fbf",   // muted teal
-} as const;
-
-// Shadows — contextual depth tokens
-export const shadows = {
-  light: {
-    shelf: "0 8px 32px rgba(0,0,0,0.1)",
-    shelfHover: "0 12px 40px rgba(0,0,0,0.15)",
-    product: "0 16px 48px rgba(0,0,0,0.12)",
-  },
-  dark: {
-    shelf: "0 8px 32px rgba(0,0,0,0.5)",
-    shelfHover: "0 12px 40px rgba(0,0,0,0.6)",
-    product: "0 16px 48px rgba(0,0,0,0.5)",
-  },
-} as const;
-
-// Subtle tinted overlays for active/selected states
-export const overlays = {
-  light: {
-    goldSubtle: "rgba(97, 79, 29, 0.06)",
-  },
-  dark: {
-    goldSubtle: "rgba(201, 168, 76, 0.1)",
-  },
-} as const;
-
-const light = {
-  // Backgrounds
-  bgPrimary: "#f5f0e8",       // cream
-  bgSecondary: "#faf7f2",     // warm white
-
-  // Text
-  textPrimary: "#1a0a2e",     // deep purple — 16.4:1 on cream
-  textBody: "#4a3d5c",        // purple-gray — 8.8:1 on cream
-
-  // Accent — gold
-  accentGoldText: "#614f1d",        // dark bronze — 7.0:1, AAA safe for text
-  accentGoldDecorative: "#c9a84c",  // brand gold — borders/icons ONLY, NOT text
-
-  // CTA
-  ctaPrimaryBg: "#2d1854",
-  ctaPrimaryText: "#f0edf5",
-  ctaSecondaryBorder: "#2d1854",
-  ctaSecondaryText: "#2d1854",
-
-  // Structural
-  shelfLine: "#d6c9a8",       // subtle gold-tinted rule
-  divider: "#e0d8c8",         // light cream divider
-  border: "#d4cbb8",          // card/input borders
-} as const;
-
-const dark = {
-  // Backgrounds
-  bgPrimary: "#0d0b12",
-  bgSecondary: "#121018",
-  bgTertiary: "#1a0f2e",
-
-  // Text
-  textPrimary: "#f0edf5",     // 16.9:1 on dark bg
-  textBody: "#b8a8d6",        // 9.0:1 on dark bg
-
-  // Accent
-  accentGold: "#c9a84c",      // 8.6:1 — safe on dark backgrounds
-  purpleAccent: "#c4a6e8",    // 9.3:1
-
-  // CTA
-  ctaPrimaryBg: "#c9a84c",
-  ctaPrimaryText: "#0d0b12",
-  ctaSecondaryBorder: "#c9a84c",
-  ctaSecondaryText: "#c9a84c",
-
-  // Structural
-  shelfLine: "#2a1f3d",
-  divider: "#1f1730",
-  border: "#2a1f3d",
-} as const;
-
 export const colors = {
-  brand,
-  light,
-  dark,
+  bg: {
+    primary: "#0d0b12",    // deepest dark — hero, anchor sections
+    secondary: "#121018",  // slightly lighter
+    tertiary: "#1a0f2e",   // purple-tinted dark
+  },
+
+  gold: {
+    primary: "#c9a84c",    // CTAs, labels, accents, italic emphasis
+    light: "#d4b65a",      // gradient end, button gradient
+    hover: "#e0c76e",      // hover states
+  },
+
+  purple: {
+    deep: "#1a0a2e",       // button text on gold backgrounds
+    dark: "#2d1854",       // borders, shadows, decorative
+    medium: "#6b3fa0",     // decorative accents, geometric bg
+    accent: "#c4a6e8",     // subheadings, pillar-specific accents
+  },
+
+  text: {
+    heading: "#f0edf5",    // 16.89:1 vs primary bg
+    body: "#ede4e8",       // 15.71:1 vs primary bg
+    muted: "#cec5ca",      // 10.82:1 vs primary bg
+    gold: "#c9a84c",       // 8.56:1 vs primary bg
+  },
+
+  pillar: {
+    sacred: "#c9a84c",     // gold
+    selfish: "#9b7ec8",    // light purple
+    shared: "#c4a6e8",     // accent purple
+  },
+
+  semantic: {
+    success: "#4ade80",
+  },
+
+  // Structural
+  border: "#2a1f3d",
+  shelfLine: "#c9a84c",
+  divider: "#c9a84c",
 } as const;
 
 /**
  * Returns alternating section background colors for visual rhythm.
+ * Adjacent sections never share the same background.
  */
-export function getSectionBg(
-  index: number,
-  mode: "light" | "dark" = "light"
-): string {
-  if (mode === "dark") {
-    const bgs = [dark.bgPrimary, dark.bgSecondary, dark.bgTertiary];
-    return bgs[index % bgs.length];
-  }
-  const bgs = [light.bgPrimary, light.bgSecondary];
+export function getSectionBg(index: number): string {
+  const bgs = [colors.bg.primary, colors.bg.secondary, colors.bg.tertiary];
   return bgs[index % bgs.length];
 }
 
 // ---------------------------------------------------------------------------
-// Typography
+// Shadows
 // ---------------------------------------------------------------------------
 
-export const typography = {
-  h1: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(3rem, 5vw, 4.5rem)",
-    fontWeight: "700",
-    lineHeight: "1.1",
-    letterSpacing: "-0.02em",
-  },
-  h2: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(2rem, 3.5vw, 3rem)",
-    fontWeight: "600",
-    lineHeight: "1.15",
-    letterSpacing: "-0.01em",
-  },
-  h3: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-    fontWeight: "600",
-    lineHeight: "1.2",
-    letterSpacing: "0",
-  },
-  h4: {
-    fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(1.2rem, 2vw, 1.5rem)",
-    fontWeight: "600",
-    lineHeight: "1.25",
-    letterSpacing: "0",
-  },
-  label: {
-    fontFamily: "system-ui, sans-serif",
-    fontSize: "0.875rem",
-    fontWeight: "700",
-    lineHeight: "1.4",
-    letterSpacing: "0.25em",
-    textTransform: "uppercase" as const,
-  },
-  body: {
-    fontFamily: "system-ui, sans-serif",
-    fontSize: "1.05rem",
-    fontWeight: "400",
-    lineHeight: "1.7",
-    letterSpacing: "0",
-  },
-  bodyLg: {
-    fontFamily: "system-ui, sans-serif",
-    fontSize: "1.15rem",
-    fontWeight: "400",
-    lineHeight: "1.7",
-    letterSpacing: "0",
-  },
-  price: {
-    fontFamily: "system-ui, sans-serif",
-    fontSize: "1.1rem",
-    fontWeight: "700",
-    lineHeight: "1.4",
-    letterSpacing: "0",
-  },
-  cta: {
-    fontFamily: "system-ui, sans-serif",
-    fontSize: "1rem",
-    fontWeight: "700",
-    lineHeight: "1.4",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase" as const,
-  },
+export const shadows = {
+  card: `0 0 40px ${colors.purple.dark}80, 0 0 0 1px ${colors.gold.primary}15`,
+  shelf: "0 8px 32px rgba(0,0,0,0.5)",
+  shelfHover: "0 12px 40px rgba(0,0,0,0.6)",
+  product: "0 16px 48px rgba(0,0,0,0.5)",
+  buttonHover: "0 8px 25px rgba(201, 168, 76, 0.35)",
 } as const;
 
 // ---------------------------------------------------------------------------
-// Spacing
+// Overlays
+// ---------------------------------------------------------------------------
+
+export const overlays = {
+  goldSubtle: "rgba(201, 168, 76, 0.1)",
+} as const;
+
+// ---------------------------------------------------------------------------
+// Typography — Tailwind class strings per brand guidelines
+// ---------------------------------------------------------------------------
+
+export const typography = {
+  h1: "font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight",
+  h2: "font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight",
+  h3: "font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.15]",
+  h4: "font-serif text-2xl sm:text-3xl font-semibold leading-[1.2]",
+  label: "text-sm font-semibold uppercase tracking-[0.25em]",
+  bodyLg: "text-lg sm:text-xl lg:text-2xl leading-relaxed",
+  body: "text-lg sm:text-xl leading-relaxed",
+  bodySm: "text-base leading-relaxed",
+  quote: "font-serif text-lg sm:text-xl italic leading-relaxed",
+  price: "text-lg sm:text-xl font-bold",
+  ctaLink: "text-base sm:text-lg font-semibold uppercase tracking-[0.15em]",
+} as const;
+
+// ---------------------------------------------------------------------------
+// Spacing — Tailwind class strings
 // ---------------------------------------------------------------------------
 
 export const spacing = {
-  section: {
-    paddingY: "clamp(4rem, 8vw, 7rem)",
-    paddingX: "clamp(1.5rem, 5vw, 4rem)",
-  },
-  maxContentWidth: "80rem",
-  maxTextWidth: "50rem",
+  section: "py-20 sm:py-24 lg:py-28",
+  sectionCompact: "py-16 sm:py-20 lg:py-24",
+  pageX: "px-5 sm:px-8 lg:px-10",
+  maxWidth: "max-w-7xl mx-auto",
+  maxWidthNarrow: "max-w-4xl mx-auto",
+  headingMb: "mb-6",
+  bodyMb: "mb-8",
+  labelMb: "mb-4",
   touchTarget: "48px",
   touchGap: "8px",
 } as const;
@@ -213,44 +127,52 @@ export const spacing = {
 // ---------------------------------------------------------------------------
 
 export const radius = {
-  sm: "4px",
-  md: "8px",
-  lg: "12px",
+  pill: "9999px",
+  card: "8px",
+  subtle: "4px",
+  none: "0",
 } as const;
 
 // ---------------------------------------------------------------------------
 // Animation (Framer Motion presets)
 // ---------------------------------------------------------------------------
 
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export const animation = {
   fadeUp: {
-    initial: { opacity: 0, y: 24 },
+    initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.8, ease },
   },
   fadeIn: {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.8, ease },
   },
   slideLeft: {
-    initial: { opacity: 0, x: -32 },
+    initial: { opacity: 0, x: -40 },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.8, ease },
   },
   slideRight: {
-    initial: { opacity: 0, x: 32 },
+    initial: { opacity: 0, x: 40 },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.8, ease },
+  },
+  scaleLine: {
+    initial: { scaleX: 0 },
+    animate: { scaleX: 1 },
+    transition: { duration: 1, delay: 0.5, ease },
   },
   stagger: {
     container: {
-      animate: { transition: { staggerChildren: 0.1 } },
+      animate: { transition: { staggerChildren: 0.15 } },
     },
     item: {
-      initial: { opacity: 0, y: 16 },
+      initial: { opacity: 0, y: 20 },
       animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.4, ease: "easeOut" },
+      transition: { duration: 0.6, ease },
     },
   },
   viewport: { once: true, margin: "-60px" as const },
@@ -261,6 +183,6 @@ export const animation = {
 // ---------------------------------------------------------------------------
 
 export const focus = {
-  outline: `3px solid ${brand.gold}`,
+  outline: `2px solid ${colors.gold.primary}`,
   outlineOffset: "3px",
 } as const;

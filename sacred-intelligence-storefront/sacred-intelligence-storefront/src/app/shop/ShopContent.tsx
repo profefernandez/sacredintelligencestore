@@ -4,18 +4,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { useTheme } from "@/components/layout/ThemeProvider";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { mockProducts, mockCategories } from "@/data/mock-products";
 import { formatPrice, typeLabels } from "@/lib/utils";
-import { colors, typography, spacing, animation, radius, pillarColors, shadows, overlays } from "@/lib/design-system";
+import { colors, typography, spacing, animation, radius, shadows, overlays } from "@/lib/design-system";
 import type { Product } from "@/lib/types";
 
 function ShelfItem({ product, index }: { product: Product; index: number }) {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <motion.div
       initial={animation.stagger.item.initial}
@@ -25,48 +21,19 @@ function ShelfItem({ product, index }: { product: Product; index: number }) {
     >
       <Link
         href={`/products/${product.slug}`}
-        style={{ textDecoration: "none", color: "inherit", display: "block" }}
+        className="no-underline block group"
         aria-label={`View ${product.name} — ${formatPrice(product.price)}`}
       >
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            paddingBottom: "1.5rem",
-          }}
-        >
+        <div className="relative flex flex-col items-center pb-6">
           {/* Product Image */}
           <div
+            className="relative w-full mb-5 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1"
             style={{
-              position: "relative",
-              width: "100%",
               maxWidth: "220px",
-              aspectRatio:
-                product.product_type === "book" ? "2/3" : "1/1",
-              borderRadius: radius.md,
-              overflow: "hidden",
-              backgroundColor: isDark
-                ? colors.dark.bgSecondary
-                : colors.light.bgSecondary,
-              marginBottom: "1.25rem",
-              boxShadow: isDark
-                ? shadows.dark.shelf
-                : shadows.light.shelf,
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-              (e.currentTarget as HTMLElement).style.boxShadow = isDark
-                ? shadows.dark.shelfHover
-                : shadows.light.shelfHover;
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLElement).style.boxShadow = isDark
-                ? shadows.dark.shelf
-                : shadows.light.shelf;
+              aspectRatio: product.product_type === "book" ? "2/3" : "1/1",
+              borderRadius: radius.card,
+              backgroundColor: colors.bg.secondary,
+              boxShadow: shadows.shelf,
             }}
           >
             <Image
@@ -77,18 +44,11 @@ function ShelfItem({ product, index }: { product: Product; index: number }) {
               style={{ objectFit: "cover" }}
             />
 
-            {/* Pillar tag indicator */}
             {product.pillar_tag !== "none" && (
               <div
+                className="absolute top-2 right-2 w-2 h-2 rounded-full"
                 style={{
-                  position: "absolute",
-                  top: "8px",
-                  right: "8px",
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  backgroundColor:
-                    pillarColors[product.pillar_tag] || "transparent",
+                  backgroundColor: colors.pillar[product.pillar_tag] || "transparent",
                 }}
                 aria-hidden="true"
               />
@@ -97,58 +57,36 @@ function ShelfItem({ product, index }: { product: Product; index: number }) {
 
           {/* Type label */}
           <span
-            style={{
-              ...typography.label,
-              fontSize: "0.7rem",
-              letterSpacing: "0.2em",
-              color: isDark
-                ? colors.dark.accentGold
-                : colors.light.accentGoldText,
-              marginBottom: "0.5rem",
-            }}
+            className={`${typography.label} mb-2`}
+            style={{ color: colors.text.gold, fontSize: "0.7rem", letterSpacing: "0.2em" }}
           >
             {typeLabels[product.product_type]}
           </span>
 
           {/* Product name */}
           <h3
+            className={`${typography.h4} text-center mb-2`}
             style={{
-              ...typography.h4,
-              fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
-              color: isDark
-                ? colors.dark.textPrimary
-                : colors.light.textPrimary,
-              textAlign: "center",
-              marginBottom: "0.5rem",
+              color: colors.text.heading,
               maxWidth: "220px",
+              fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
             }}
           >
             {product.name}
           </h3>
 
           {/* Price */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <div className="flex items-center gap-2">
             <span
-              style={{
-                ...typography.price,
-                color: isDark
-                  ? colors.dark.textPrimary
-                  : colors.light.textPrimary,
-              }}
+              className={typography.price}
+              style={{ color: colors.text.heading }}
             >
               {formatPrice(product.price)}
             </span>
-            {product.compare_price && (
+            {product.compare_price != null && (
               <span
-                style={{
-                  ...typography.body,
-                  fontSize: "0.9rem",
-                  textDecoration: "line-through",
-                  opacity: 0.5,
-                  color: isDark
-                    ? colors.dark.textBody
-                    : colors.light.textBody,
-                }}
+                className={`${typography.bodySm} line-through opacity-50`}
+                style={{ color: colors.text.muted }}
               >
                 {formatPrice(product.compare_price)}
               </span>
@@ -157,13 +95,11 @@ function ShelfItem({ product, index }: { product: Product; index: number }) {
         </div>
       </Link>
 
-      {/* Shelf line beneath product */}
+      {/* Shelf line */}
       <div
+        className="h-[2px]"
         style={{
-          height: "2px",
-          background: `linear-gradient(90deg, transparent, ${
-            isDark ? colors.dark.shelfLine : colors.light.shelfLine
-          }, transparent)`,
+          background: `linear-gradient(90deg, transparent, ${colors.shelfLine}, transparent)`,
         }}
         aria-hidden="true"
       />
@@ -172,8 +108,6 @@ function ShelfItem({ product, index }: { product: Product; index: number }) {
 }
 
 export function ShopContent() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
   const [activeFilter, setActiveFilter] = useState<string>("all");
 
   const published = mockProducts.filter((p) => p.status === "published");
@@ -191,25 +125,17 @@ export function ShopContent() {
     <div style={{ marginTop: "72px" }}>
       {/* Hero */}
       <Section index={0}>
-        <div style={{ textAlign: "center", maxWidth: spacing.maxTextWidth, margin: "0 auto" }}>
+        <div className={`${spacing.maxWidthNarrow} text-center`}>
           <SectionLabel>The Collection</SectionLabel>
           <h1
-            style={{
-              ...typography.h1,
-              color: isDark ? colors.dark.textPrimary : colors.light.textPrimary,
-              marginTop: "1rem",
-              marginBottom: "1.5rem",
-            }}
+            className={`${typography.h1} ${spacing.headingMb}`}
+            style={{ color: colors.text.heading }}
           >
             Sacred Shelf
           </h1>
           <p
-            style={{
-              ...typography.bodyLg,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              maxWidth: "36rem",
-              margin: "0 auto",
-            }}
+            className={`${typography.bodyLg} max-w-xl mx-auto`}
+            style={{ color: colors.text.body }}
           >
             Curated works for your Sacred, Self-ish, and Shared journeys.
             Each piece chosen with intention.
@@ -217,17 +143,11 @@ export function ShopContent() {
         </div>
       </Section>
 
-      {/* Filters */}
+      {/* Filters + Grid */}
       <Section index={1}>
         <nav
           aria-label="Filter products by category"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: spacing.touchGap,
-            flexWrap: "wrap",
-            marginBottom: "3rem",
-          }}
+          className="flex justify-center gap-2 flex-wrap mb-12"
         >
           {filterOptions.map((opt) => {
             const isActive = activeFilter === opt.slug;
@@ -236,35 +156,13 @@ export function ShopContent() {
                 key={opt.slug}
                 onClick={() => setActiveFilter(opt.slug)}
                 aria-pressed={isActive}
+                className={`${typography.label} min-h-[48px] px-5 transition-all cursor-pointer`}
                 style={{
-                  ...typography.label,
                   fontSize: "0.75rem",
-                  minHeight: spacing.touchTarget,
-                  padding: "0 1.25rem",
-                  borderRadius: radius.md,
-                  border: `1.5px solid ${
-                    isActive
-                      ? isDark
-                        ? colors.dark.accentGold
-                        : colors.light.accentGoldText
-                      : isDark
-                        ? colors.dark.border
-                        : colors.light.border
-                  }`,
-                  backgroundColor: isActive
-                    ? isDark
-                      ? overlays.dark.goldSubtle
-                      : overlays.light.goldSubtle
-                    : "transparent",
-                  color: isActive
-                    ? isDark
-                      ? colors.dark.accentGold
-                      : colors.light.accentGoldText
-                    : isDark
-                      ? colors.dark.textBody
-                      : colors.light.textBody,
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
+                  borderRadius: radius.card,
+                  border: `1.5px solid ${isActive ? colors.gold.primary : colors.border}`,
+                  backgroundColor: isActive ? overlays.goldSubtle : "transparent",
+                  color: isActive ? colors.gold.primary : colors.text.muted,
                 }}
               >
                 {opt.name}
@@ -273,14 +171,12 @@ export function ShopContent() {
           })}
         </nav>
 
-        {/* Sacred Shelf Grid */}
         <div
+          className={spacing.maxWidth}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: "2.5rem",
-            maxWidth: spacing.maxContentWidth,
-            margin: "0 auto",
           }}
         >
           {filtered.map((product, i) => (
@@ -290,12 +186,8 @@ export function ShopContent() {
 
         {filtered.length === 0 && (
           <p
-            style={{
-              ...typography.body,
-              textAlign: "center",
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              marginTop: "3rem",
-            }}
+            className={`${typography.body} text-center mt-12`}
+            style={{ color: colors.text.muted }}
           >
             No products found in this category.
           </p>

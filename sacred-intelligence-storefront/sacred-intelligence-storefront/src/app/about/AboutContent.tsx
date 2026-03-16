@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "@/components/layout/ThemeProvider";
 import { Section } from "@/components/ui/Section";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GoldAccent } from "@/components/ui/GoldAccent";
@@ -28,40 +27,21 @@ const pillars = [
 ];
 
 export function AboutContent() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
   return (
     <div style={{ marginTop: "72px" }}>
       {/* Hero */}
       <Section index={0}>
-        <div
-          style={{
-            textAlign: "center",
-            maxWidth: spacing.maxTextWidth,
-            margin: "0 auto",
-          }}
-        >
+        <div className={`${spacing.maxWidthNarrow} text-center`}>
           <SectionLabel>About</SectionLabel>
           <h1
-            style={{
-              ...typography.h1,
-              color: isDark
-                ? colors.dark.textPrimary
-                : colors.light.textPrimary,
-              marginTop: "1rem",
-              marginBottom: "1.5rem",
-            }}
+            className={`${typography.h1} ${spacing.headingMb}`}
+            style={{ color: colors.text.heading }}
           >
             Sacred Intelligence
           </h1>
           <p
-            style={{
-              ...typography.bodyLg,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              maxWidth: "38rem",
-              margin: "0 auto",
-            }}
+            className={`${typography.bodyLg} max-w-2xl mx-auto`}
+            style={{ color: colors.text.body }}
           >
             A framework for wholeness created by Rev. Dr. Terrlyn L. Curry
             Avery — guiding you to live from a place of divine connection,
@@ -72,26 +52,17 @@ export function AboutContent() {
 
       {/* About Dr. TLC */}
       <Section index={1}>
-        <div style={{ maxWidth: spacing.maxTextWidth, margin: "0 auto" }}>
+        <div className={spacing.maxWidthNarrow}>
           <SectionLabel>The Visionary</SectionLabel>
           <h2
-            style={{
-              ...typography.h2,
-              color: isDark
-                ? colors.dark.textPrimary
-                : colors.light.textPrimary,
-              marginTop: "1rem",
-              marginBottom: "1.5rem",
-            }}
+            className={`${typography.h2} ${spacing.headingMb}`}
+            style={{ color: colors.text.heading }}
           >
             Rev. Dr. Terrlyn L. Curry Avery
           </h2>
           <p
-            style={{
-              ...typography.body,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              marginBottom: "1.25rem",
-            }}
+            className={`${typography.body} mb-5`}
+            style={{ color: colors.text.body }}
           >
             Known lovingly as <GoldAccent>Dr. TLC</GoldAccent>, Rev. Dr.
             Terrlyn L. Curry Avery is a licensed psychologist, ordained
@@ -100,11 +71,8 @@ export function AboutContent() {
             psychology, spirituality, and social justice.
           </p>
           <p
-            style={{
-              ...typography.body,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              marginBottom: "1.25rem",
-            }}
+            className={`${typography.body} mb-5`}
+            style={{ color: colors.text.body }}
           >
             Dr. TLC developed Sacred Intelligence as a response to the
             fragmentation she observed in how people approach healing — treating
@@ -113,10 +81,8 @@ export function AboutContent() {
             through three accessible pillars that anyone can practice.
           </p>
           <p
-            style={{
-              ...typography.body,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-            }}
+            className={typography.body}
+            style={{ color: colors.text.body }}
           >
             Through books, guided meditations, workshops, and digital
             resources, Dr. TLC makes Sacred Intelligence accessible to anyone
@@ -126,23 +92,18 @@ export function AboutContent() {
         </div>
       </Section>
 
-      <Section index={2}>
+      <Section index={2} compact>
         <Divider ornament="◆" />
       </Section>
 
       {/* Three Pillars */}
       <Section index={0}>
-        <div style={{ maxWidth: spacing.maxTextWidth, margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+        <div className={spacing.maxWidthNarrow}>
+          <div className="text-center mb-12">
             <SectionLabel>The Framework</SectionLabel>
             <h2
-              style={{
-                ...typography.h2,
-                color: isDark
-                  ? colors.dark.textPrimary
-                  : colors.light.textPrimary,
-                marginTop: "1rem",
-              }}
+              className={typography.h2}
+              style={{ color: colors.text.heading }}
             >
               Three Pillars of Intelligence
             </h2>
@@ -161,23 +122,14 @@ export function AboutContent() {
               style={{ marginBottom: i < pillars.length - 1 ? "2.5rem" : 0 }}
             >
               <h3
-                style={{
-                  ...typography.h3,
-                  color: isDark
-                    ? colors.dark.textPrimary
-                    : colors.light.textPrimary,
-                  marginBottom: "0.75rem",
-                }}
+                className={`${typography.h3} mb-3`}
+                style={{ color: colors.text.heading }}
               >
                 <GoldAccent>{pillar.name}</GoldAccent>
               </h3>
               <p
-                style={{
-                  ...typography.body,
-                  color: isDark
-                    ? colors.dark.textBody
-                    : colors.light.textBody,
-                }}
+                className={typography.body}
+                style={{ color: colors.text.body }}
               >
                 {pillar.description}
               </p>
@@ -191,33 +143,18 @@ export function AboutContent() {
       <Section index={1}>
         <motion.div
           {...animation.fadeUp}
-          style={{
-            textAlign: "center",
-            maxWidth: spacing.maxTextWidth,
-            margin: "0 auto",
-          }}
+          className={`${spacing.maxWidthNarrow} text-center`}
         >
           <SectionLabel>Begin Your Journey</SectionLabel>
           <h2
-            style={{
-              ...typography.h2,
-              color: isDark
-                ? colors.dark.textPrimary
-                : colors.light.textPrimary,
-              marginTop: "1rem",
-              marginBottom: "1.5rem",
-            }}
+            className={`${typography.h2} ${spacing.headingMb}`}
+            style={{ color: colors.text.heading }}
           >
             Explore the Collection
           </h2>
           <p
-            style={{
-              ...typography.body,
-              color: isDark ? colors.dark.textBody : colors.light.textBody,
-              marginBottom: "2rem",
-              maxWidth: "32rem",
-              margin: "0 auto 2rem",
-            }}
+            className={`${typography.body} max-w-lg mx-auto ${spacing.bodyMb}`}
+            style={{ color: colors.text.body }}
           >
             Books, guided meditations, workshops, and resources to support your
             Sacred, Self-ish, and Shared transformation.

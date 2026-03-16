@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display } from "next/font/google";
-import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { Playfair_Display, Inter } from "next/font/google";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { Header } from "@/components/layout/Header";
@@ -13,41 +12,38 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Sacred Intelligence Collection",
     template: "%s | Sacred Intelligence Collection",
   },
-  description: "Books, guided meditations, and digital resources for your Sacred, Self-ish, and Shared journeys.",
+  description:
+    "Books, guided meditations, and digital resources for your Sacred, Self-ish, and Shared journeys.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={playfair.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            try {
-              var theme = localStorage.getItem('si-store-theme');
-              if (!theme) {
-                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-              }
-              document.documentElement.setAttribute('data-theme', theme);
-            } catch(e) {}
-          })();
-        `}} />
-      </head>
+    <html
+      lang="en"
+      className={`${playfair.variable} ${inter.variable}`}
+    >
       <body>
-        <ThemeProvider>
-          <MotionProvider>
-            <SkipLink />
-            <Header />
-            <main id="main-content">
-              {children}
-            </main>
-            <Footer />
-          </MotionProvider>
-        </ThemeProvider>
+        <MotionProvider>
+          <SkipLink />
+          <Header />
+          <main id="main-content">{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

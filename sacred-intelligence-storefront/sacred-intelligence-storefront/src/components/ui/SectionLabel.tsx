@@ -1,26 +1,17 @@
 "use client";
 
 import { colors, typography } from "@/lib/design-system";
-import { useTheme } from "@/components/layout/ThemeProvider";
 
 interface SectionLabelProps {
   children: React.ReactNode;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-export function SectionLabel({ children, style }: SectionLabelProps) {
-  const { theme } = useTheme();
-  const color =
-    theme === "dark" ? colors.dark.accentGold : colors.light.accentGoldText;
-
+export function SectionLabel({ children, className = "" }: SectionLabelProps) {
   return (
     <span
-      style={{
-        ...typography.label,
-        color,
-        display: "block",
-        ...style,
-      }}
+      className={`${typography.label} mb-4 block ${className}`}
+      style={{ color: colors.text.gold }}
     >
       {children}
     </span>

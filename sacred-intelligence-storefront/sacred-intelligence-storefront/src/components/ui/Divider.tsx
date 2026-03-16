@@ -1,50 +1,38 @@
 "use client";
 
-import { colors } from "@/lib/design-system";
-import { useTheme } from "@/components/layout/ThemeProvider";
+import { motion } from "framer-motion";
+import { colors, animation } from "@/lib/design-system";
 
 interface DividerProps {
   ornament?: React.ReactNode;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-export function Divider({ ornament, style }: DividerProps) {
-  const { theme } = useTheme();
-  const gold =
-    theme === "dark"
-      ? colors.dark.accentGold
-      : colors.light.accentGoldDecorative;
-  const transparent =
-    theme === "dark" ? colors.dark.bgPrimary : colors.light.bgPrimary;
+export function Divider({ ornament, className = "" }: DividerProps) {
+  const gold = colors.gold.primary;
 
   if (ornament) {
     return (
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "1rem",
-          margin: "2rem 0",
-          ...style,
-        }}
+        className={`flex items-center gap-4 my-8 ${className}`}
       >
-        <hr
+        <motion.hr
+          {...animation.scaleLine}
+          viewport={animation.viewport}
+          className="flex-1 border-none h-px origin-left"
           style={{
-            flex: 1,
-            border: "none",
-            height: "1px",
-            background: `linear-gradient(to right, ${transparent}, ${gold})`,
+            background: `linear-gradient(to right, transparent, ${gold})`,
           }}
         />
         <span style={{ color: gold, fontSize: "1.25rem", lineHeight: 1 }}>
           {ornament}
         </span>
-        <hr
+        <motion.hr
+          {...animation.scaleLine}
+          viewport={animation.viewport}
+          className="flex-1 border-none h-px origin-right"
           style={{
-            flex: 1,
-            border: "none",
-            height: "1px",
-            background: `linear-gradient(to left, ${transparent}, ${gold})`,
+            background: `linear-gradient(to left, transparent, ${gold})`,
           }}
         />
       </div>
@@ -52,13 +40,12 @@ export function Divider({ ornament, style }: DividerProps) {
   }
 
   return (
-    <hr
+    <motion.hr
+      {...animation.scaleLine}
+      viewport={animation.viewport}
+      className={`border-none h-px my-8 origin-left ${className}`}
       style={{
-        border: "none",
-        height: "1px",
-        margin: "2rem 0",
-        background: `linear-gradient(to right, ${transparent}, ${gold}, ${transparent})`,
-        ...style,
+        background: `linear-gradient(to right, transparent, ${gold}, transparent)`,
       }}
     />
   );
