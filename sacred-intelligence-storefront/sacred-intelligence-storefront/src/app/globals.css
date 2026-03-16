@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Theme custom properties */
+[data-theme="light"] {
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #faf7f2;
+  --text-primary: #1a0a2e;
+  --text-body: #4a3d5c;
+  --accent-gold-text: #614f1d;
+  --accent-gold-decorative: #c9a84c;
+  --cta-primary-bg: #2d1854;
+  --cta-primary-text: #f0edf5;
+  --cta-secondary-border: #2d1854;
+  --cta-secondary-text: #2d1854;
+  --shelf-line: #c9a84c;
+  --divider: #c9a84c;
+  --border: #e0d8cc;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0d0b12;
+  --bg-secondary: #121018;
+  --bg-tertiary: #1a0f2e;
+  --text-primary: #f0edf5;
+  --text-body: #b8a8d6;
+  --accent-gold-text: #c9a84c;
+  --accent-gold-decorative: #c9a84c;
+  --cta-primary-bg: #c9a84c;
+  --cta-primary-text: #0d0b12;
+  --cta-secondary-border: #c4a6e8;
+  --cta-secondary-text: #c4a6e8;
+  --shelf-line: #c9a84c;
+  --divider: #c9a84c;
+  --border: rgba(196, 181, 253, 0.15);
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-body);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Focus styles — AAA accessible */
+:focus-visible {
+  outline: 3px solid #c9a84c;
+  outline-offset: 3px;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: #2d1854;
+  color: #f0edf5;
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
