@@ -17,8 +17,16 @@ const mediaLinks = [
 ];
 
 const connectLinks = [
-  { label: "About Dr. TLC", href: "/about" },
-  { label: "Contact", href: "/about#contact" },
+  {
+    label: "About Dr. TLC",
+    href: "https://sacredintelligence.com/about",
+    external: true,
+  },
+  {
+    label: "SANKOFA Ghana Retreat",
+    href: "https://sacredintelligence.com/ghana-pilgrimage",
+    external: true,
+  },
   {
     label: "Instagram",
     href: "https://www.instagram.com/sacredintelligence",

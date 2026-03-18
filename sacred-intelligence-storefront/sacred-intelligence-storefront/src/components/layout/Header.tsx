@@ -14,7 +14,7 @@ const navLinks = [
   { href: "/shop", label: "Shop" },
   { href: "/media", label: "Media" },
   { href: "/workshops", label: "Workshops" },
-  { href: "/about", label: "About" },
+  { href: "https://sacredintelligence.com/about", label: "About", external: true },
 ];
 
 const GLASS_BORDER = "rgba(201, 168, 76, 0.12)";
@@ -73,22 +73,38 @@ export function Header() {
             className="hidden lg:flex items-center gap-1 flex-1"
             aria-label="Primary"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center justify-center min-w-[48px] min-h-[48px] px-4 no-underline text-base font-medium tracking-wide transition-colors duration-200"
-                style={{ color: colors.text.muted }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = colors.gold.hover)
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = colors.text.muted)
-                }
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isExternal = "external" in link && link.external;
+              const linkProps = {
+                className:
+                  "flex items-center justify-center min-w-[48px] min-h-[48px] px-4 no-underline text-base font-medium tracking-wide transition-colors duration-200",
+                style: { color: colors.text.muted },
+                onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) =>
+                  (e.currentTarget.style.color = colors.gold.hover),
+                onMouseLeave: (e: React.MouseEvent<HTMLAnchorElement>) =>
+                  (e.currentTarget.style.color = colors.text.muted),
+              };
+
+              if (isExternal) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    {...linkProps}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={link.href} href={link.href} {...linkProps}>
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Desktop Right Icons */}
@@ -252,23 +268,39 @@ export function Header() {
               className="flex flex-col px-8 sm:px-12 mt-8 gap-2 flex-1"
               aria-label="Mobile navigation"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center min-h-[48px] py-3 no-underline text-2xl font-serif font-semibold tracking-wide transition-colors duration-200"
-                  style={{ color: colors.text.heading }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = colors.gold.hover)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = colors.text.heading)
-                  }
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isExternal = "external" in link && link.external;
+                const mobileProps = {
+                  className:
+                    "flex items-center min-h-[48px] py-3 no-underline text-2xl font-serif font-semibold tracking-wide transition-colors duration-200",
+                  style: { color: colors.text.heading },
+                  onClick: () => setMobileMenuOpen(false),
+                  onMouseEnter: (e: React.MouseEvent<HTMLAnchorElement>) =>
+                    (e.currentTarget.style.color = colors.gold.hover),
+                  onMouseLeave: (e: React.MouseEvent<HTMLAnchorElement>) =>
+                    (e.currentTarget.style.color = colors.text.heading),
+                };
+
+                if (isExternal) {
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      {...mobileProps}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link key={link.href} href={link.href} {...mobileProps}>
+                    {link.label}
+                  </Link>
+                );
+              })}
 
               <Link
                 href="/account"

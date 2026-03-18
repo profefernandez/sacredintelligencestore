@@ -9,7 +9,7 @@ export const mockCategories: Category[] = [
     id: "cat-books",
     name: "Books & Guides",
     slug: "books-guides",
-    description: "Written works for Sacred, Self-ish, and Shared transformation.",
+    description: "Award-winning works for Sacred, Self~ish, and Shared transformation.",
     sort_order: 1,
     status: "published",
   },
@@ -23,9 +23,9 @@ export const mockCategories: Category[] = [
   },
   {
     id: "cat-workshops",
-    name: "Workshops & Sessions",
-    slug: "workshops-sessions",
-    description: "Live and recorded workshops for deeper healing.",
+    name: "Workshops & Retreats",
+    slug: "workshops-retreats",
+    description: "Live workshops, retreats, and recorded sessions for deeper healing.",
     sort_order: 3,
     status: "published",
   },
@@ -37,16 +37,16 @@ export const mockCategories: Category[] = [
 
 export const mockBookProduct: Product = {
   id: "prod-book-sacred",
-  name: "Sacred Intelligence: The Power of Your Divine Connection",
+  name: "Sacred Intelligence: The Essence of Sacred, Selfish, and Shared Relationships",
   slug: "sacred-intelligence-book",
   description:
-    "Discover how to access your divine connection and activate the Sacred pillar of your life. Dr. TLC guides you through practices that awaken your spiritual intelligence and deepen your relationship with the Divine.",
+    "The book that started it all. Rev. Dr. Terrlyn L. Curry Avery introduces the Sacred Intelligence framework — a transformative approach to understanding your Sacred, Self~ish, and Shared relationships. NYC Big Book Award 2025 — Distinguished Favorite.",
   price: 2495,
   images: [
     {
       id: "img-book-sacred",
       url: "/images/book-sacred.jpg",
-      alt: "Sacred Intelligence book cover",
+      alt: "Sacred Intelligence book cover — Healing from Within",
       width: 600,
       height: 900,
     },
@@ -61,65 +61,91 @@ export const mockBookProduct: Product = {
 };
 
 export const mockAlbumProduct: Product = {
-  id: "prod-album-stillness",
-  name: "Sacred Stillness: Guided Meditations",
-  slug: "sacred-stillness-album",
+  id: "prod-album-meditations",
+  name: "Dismantling Racism: The Meditations",
+  slug: "dismantling-racism-meditations",
   description:
-    "A collection of guided meditations designed to help you quiet the noise, reconnect with your Sacred self, and find stillness in a world of chaos. Each track is rooted in the Sacred Intelligence framework.",
+    "A 9-track guided meditation album by Rev. Dr. Terrlyn L. Curry Avery. Each meditation corresponds to a chapter of Dismantling Racism, guiding you through awakening, knowing presence, divine wisdom, and beloved spirit. 55 minutes of transformative practice.",
   price: 1499,
   images: [
     {
-      id: "img-album-stillness",
-      url: "/images/album-sacred-stillness.jpg",
-      alt: "Sacred Stillness meditation album cover",
+      id: "img-album-meditations",
+      url: "/images/album-dismantling-racism-meditations.jpg",
+      alt: "Dismantling Racism: The Meditations album cover",
       width: 600,
       height: 600,
     },
   ],
   category: mockCategories[1],
   product_type: "album",
-  pillar_tag: "sacred",
-  stripe_price_id: "price_placeholder_album_stillness",
+  pillar_tag: "shared",
+  stripe_price_id: "price_placeholder_album_meditations",
   featured: true,
   status: "published",
   sort_order: 2,
 };
 
 // ---------------------------------------------------------------------------
-// Full product array — one per type minimum
+// Full product array
 // ---------------------------------------------------------------------------
 
 export const mockProducts: Product[] = [
-  // Book — Sacred pillar
+  // Book — Sacred Intelligence (flagship)
   mockBookProduct,
 
-  // Book — Self-ish pillar
+  // Book — Quieting, Confidence & Strength
   {
-    id: "prod-book-selfish",
-    name: "The Self-ish Journey: Reclaiming Your Right to You",
-    slug: "selfish-journey-book",
+    id: "prod-book-quieting",
+    name: "Quieting, Confidence & Strength: Prayers to Elevate, Enrich & Expand Your Relationships",
+    slug: "quieting-confidence-strength",
     description:
-      "Learn why putting yourself first is not selfish — it is Self-ish. This book walks you through setting boundaries, practicing radical self-love, and building an unshakeable relationship with yourself.",
-    price: 2495,
+      "The sacred practice of becoming still. A collection of prayers and reflections to deepen your relationship with yourself, others, and the Divine. NYC Big Book Award — Distinguished Favorite in Spirituality.",
+    price: 1895,
     images: [
       {
-        id: "img-book-selfish",
-        url: "/images/book-selfish.jpg",
-        alt: "The Self-ish Journey book cover",
+        id: "img-book-quieting",
+        url: "/images/book-quieting.jpg",
+        alt: "Quieting, Confidence & Strength book cover",
         width: 600,
         height: 900,
       },
     ],
     category: mockCategories[0],
     product_type: "book",
-    pillar_tag: "selfish",
-    stripe_price_id: "price_placeholder_book_selfish",
+    pillar_tag: "sacred",
+    stripe_price_id: "price_placeholder_book_quieting",
     featured: false,
     status: "published",
     sort_order: 3,
   },
 
-  // Album
+  // Book — Dismantling Racism
+  {
+    id: "prod-book-dismantling",
+    name: "Dismantling Racism: Healing Separation From the Inside Out",
+    slug: "dismantling-racism-book",
+    description:
+      "A Sacred Intelligence journey of faith. Rev. Dr. Curry Avery provides a framework for understanding and dismantling racism through spiritual and psychological transformation. NYC Big Book Award 2025 — Distinguished Favorite in Racism.",
+    price: 2495,
+    images: [
+      {
+        id: "img-book-dismantling",
+        url: "/images/book-dismantling-racism.jpg",
+        alt: "Dismantling Racism book cover",
+        width: 600,
+        height: 900,
+      },
+    ],
+    category: mockCategories[0],
+    product_type: "book",
+    pillar_tag: "shared",
+    stripe_price_id: "price_placeholder_book_dismantling",
+    featured: true,
+    status: "published",
+    sort_order: 4,
+  },
+
+  // Album — Dismantling Racism: The Meditations
   mockAlbumProduct,
 
   // Document — B.R.E.A.T.H. Guide
@@ -146,7 +172,7 @@ export const mockProducts: Product[] = [
     preview_content: "Chapter 1: Being Present — Before you can breathe, you must stop...",
     featured: false,
     status: "published",
-    sort_order: 4,
+    sort_order: 5,
   },
 
   // Merchandise — Journal
@@ -155,7 +181,7 @@ export const mockProducts: Product[] = [
     name: "Sacred Intelligence Reflection Journal",
     slug: "sacred-intelligence-journal",
     description:
-      "A premium hardcover journal with guided prompts rooted in the Sacred, Self-ish, and Shared framework. Designed for daily reflection, intention-setting, and spiritual growth.",
+      "A premium hardcover journal with guided prompts rooted in the Sacred, Self~ish, and Shared framework. Designed for daily reflection, intention-setting, and spiritual growth.",
     price: 3495,
     compare_price: 3995,
     images: [
@@ -173,10 +199,10 @@ export const mockProducts: Product[] = [
     stripe_price_id: "price_placeholder_merch_journal",
     featured: true,
     status: "published",
-    sort_order: 5,
+    sort_order: 6,
   },
 
-  // Workshop
+  // Workshop — Healing Through Sacred Intelligence
   {
     id: "prod-workshop-healing",
     name: "Healing Through Sacred Intelligence: Live Workshop",
@@ -207,7 +233,7 @@ export const mockProducts: Product[] = [
     },
     featured: true,
     status: "published",
-    sort_order: 6,
+    sort_order: 7,
   },
 
   // Video — B.R.E.A.T.H. Course
@@ -234,22 +260,22 @@ export const mockProducts: Product[] = [
     preview_content: "Module 1: Being Present — The foundation of all healing begins with...",
     featured: false,
     status: "published",
-    sort_order: 7,
+    sort_order: 8,
   },
 
-  // Workshop — ANKOFA Ghana Retreat
+  // Workshop — SANKOFA Ghana Retreat
   {
-    id: "prod-workshop-ankofa",
-    name: "ANKOFA: Moving From History to Healing — Ghana Retreat",
-    slug: "ankofa-ghana-retreat",
+    id: "prod-workshop-sankofa",
+    name: "SANKOFA: Moving From History to Healing — Ghana Retreat",
+    slug: "sankofa-ghana-retreat",
     description:
-      "A transformative 10-day journey to Ghana with Rev. Dr. TLC. Reflect, connect, and heal through guided exercises, thought-provoking conversations, and powerful tools for dismantling racism. October 27 – November 6, 2026 · Limited to 5–10 travelers.",
+      "A transformative 10-day journey to Ghana with Rev. Dr. TLC. Reflect, connect, and heal through guided exercises, thought-provoking conversations, and powerful tools for dismantling racism. October 27 – November 6, 2026 · Limited to 5–10 travelers. $500 deposit to reserve.",
     price: 1099700,
     images: [
       {
-        id: "img-workshop-ankofa",
-        url: "/images/workshop-ankofa-ghana.jpg",
-        alt: "ANKOFA Ghana retreat — a journey of healing",
+        id: "img-workshop-sankofa",
+        url: "/images/workshop-sankofa-ghana.jpg",
+        alt: "SANKOFA Ghana retreat — a journey of healing",
         width: 800,
         height: 500,
       },
@@ -257,10 +283,10 @@ export const mockProducts: Product[] = [
     category: mockCategories[2],
     product_type: "workshop",
     pillar_tag: "shared",
-    stripe_price_id: "price_placeholder_workshop_ankofa",
+    stripe_price_id: "price_placeholder_workshop_sankofa",
     presenter_name: "Rev. Dr. Terrlyn L. Curry Avery",
     presenter_image: {
-      id: "img-drtlc-ankofa",
+      id: "img-drtlc-sankofa",
       url: "/images/dr-tlc-presenter.jpg",
       alt: "Rev. Dr. Terrlyn L. Curry Avery",
       width: 400,
@@ -268,6 +294,6 @@ export const mockProducts: Product[] = [
     },
     featured: true,
     status: "published",
-    sort_order: 8,
+    sort_order: 9,
   },
 ];
