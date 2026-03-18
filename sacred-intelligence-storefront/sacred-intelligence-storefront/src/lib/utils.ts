@@ -1,4 +1,6 @@
 import type { ProductType } from "./types";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -7,8 +9,9 @@ export function formatPrice(cents: number): string {
   }).format(cents / 100);
 }
 
-export function cn(...classes: (string | false | undefined | null)[]): string {
-  return classes.filter(Boolean).join(" ");
+/** Merge Tailwind classes safely — handles conflicts and conditionals */
+export function cn(...inputs: ClassValue[]): string {
+  return twMerge(clsx(inputs));
 }
 
 const PHYSICAL_TYPES: ProductType[] = ["book", "merchandise"];

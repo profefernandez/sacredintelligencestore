@@ -4,6 +4,7 @@ import { MotionProvider } from "@/components/layout/MotionProvider";
 import { SkipLink } from "@/components/ui/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import BottomNav from "@/components/layout/BottomNav";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -41,8 +42,9 @@ export default function RootLayout({
         <MotionProvider>
           <SkipLink />
           <Header />
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="pb-[72px] lg:pb-0">{children}</main>
           <Footer />
+          <BottomNav />
         </MotionProvider>
       </body>
     </html>

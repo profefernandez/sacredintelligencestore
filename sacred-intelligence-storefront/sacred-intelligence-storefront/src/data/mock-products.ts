@@ -236,4 +236,38 @@ export const mockProducts: Product[] = [
     status: "published",
     sort_order: 7,
   },
+
+  // Workshop — ANKOFA Ghana Retreat
+  {
+    id: "prod-workshop-ankofa",
+    name: "ANKOFA: Moving From History to Healing — Ghana Retreat",
+    slug: "ankofa-ghana-retreat",
+    description:
+      "A transformative 10-day journey to Ghana with Rev. Dr. TLC. Reflect, connect, and heal through guided exercises, thought-provoking conversations, and powerful tools for dismantling racism. October 27 – November 6, 2026 · Limited to 5–10 travelers.",
+    price: 1099700,
+    images: [
+      {
+        id: "img-workshop-ankofa",
+        url: "/images/workshop-ankofa-ghana.jpg",
+        alt: "ANKOFA Ghana retreat — a journey of healing",
+        width: 800,
+        height: 500,
+      },
+    ],
+    category: mockCategories[2],
+    product_type: "workshop",
+    pillar_tag: "shared",
+    stripe_price_id: "price_placeholder_workshop_ankofa",
+    presenter_name: "Rev. Dr. Terrlyn L. Curry Avery",
+    presenter_image: {
+      id: "img-drtlc-ankofa",
+      url: "/images/dr-tlc-presenter.jpg",
+      alt: "Rev. Dr. Terrlyn L. Curry Avery",
+      width: 400,
+      height: 400,
+    },
+    featured: true,
+    status: "published",
+    sort_order: 8,
+  },
 ];

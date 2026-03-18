@@ -52,6 +52,20 @@ export const colors = {
     success: "#4ade80",
   },
 
+  glass: {
+    bg: "rgba(13, 11, 18, 0.7)",        // glass card background
+    bgHover: "rgba(13, 11, 18, 0.85)",   // glass card hover
+    border: "rgba(201, 168, 76, 0.12)",   // subtle gold border
+    borderHover: "rgba(201, 168, 76, 0.25)", // gold border on hover
+  },
+
+  glow: {
+    purple: "rgba(107, 63, 160, 0.15)",   // ambient purple halo
+    purpleStrong: "rgba(107, 63, 160, 0.25)", // stronger purple glow
+    gold: "rgba(201, 168, 76, 0.2)",      // gold glow for CTAs
+    goldStrong: "rgba(201, 168, 76, 0.35)", // stronger gold glow
+  },
+
   // Structural
   border: "#2a1f3d",
   shelfLine: "#c9a84c",
@@ -77,6 +91,10 @@ export const shadows = {
   shelfHover: "0 12px 40px rgba(0,0,0,0.6)",
   product: "0 16px 48px rgba(0,0,0,0.5)",
   buttonHover: "0 8px 25px rgba(201, 168, 76, 0.35)",
+  glassCard: `0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(201, 168, 76, 0.08)`,
+  glassCardHover: `0 16px 48px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 76, 0.2), 0 0 30px rgba(107, 63, 160, 0.1)`,
+  goldGlow: `0 0 20px rgba(201, 168, 76, 0.3), 0 0 40px rgba(201, 168, 76, 0.15)`,
+  purpleAmbient: `0 0 80px rgba(107, 63, 160, 0.15)`,
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -92,17 +110,17 @@ export const overlays = {
 // ---------------------------------------------------------------------------
 
 export const typography = {
-  h1: "font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.05] tracking-tight",
-  h2: "font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight",
-  h3: "font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.15]",
-  h4: "font-serif text-2xl sm:text-3xl font-semibold leading-[1.2]",
-  label: "text-sm font-semibold uppercase tracking-[0.25em]",
-  bodyLg: "text-lg sm:text-xl lg:text-2xl leading-relaxed",
-  body: "text-lg sm:text-xl leading-relaxed",
-  bodySm: "text-base leading-relaxed",
-  quote: "font-serif text-lg sm:text-xl italic leading-relaxed",
-  price: "text-lg sm:text-xl font-bold",
-  ctaLink: "text-base sm:text-lg font-semibold uppercase tracking-[0.15em]",
+  h1: "font-serif text-2xl sm:text-3xl lg:text-4xl font-bold leading-[1.1] tracking-tight",
+  h2: "font-serif text-xl sm:text-2xl lg:text-3xl font-semibold leading-[1.15] tracking-tight",
+  h3: "font-serif text-lg sm:text-xl lg:text-2xl font-semibold leading-[1.2]",
+  h4: "font-serif text-base sm:text-lg lg:text-xl font-semibold leading-[1.25]",
+  label: "text-xs font-semibold uppercase tracking-[0.2em]",
+  bodyLg: "text-base sm:text-lg leading-relaxed",
+  body: "text-sm sm:text-base leading-relaxed",
+  bodySm: "text-sm leading-relaxed",
+  quote: "font-serif text-base sm:text-lg italic leading-relaxed",
+  price: "text-base sm:text-lg font-bold",
+  ctaLink: "text-sm sm:text-base font-semibold uppercase tracking-[0.12em]",
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -110,8 +128,8 @@ export const typography = {
 // ---------------------------------------------------------------------------
 
 export const spacing = {
-  section: "py-20 sm:py-24 lg:py-28",
-  sectionCompact: "py-16 sm:py-20 lg:py-24",
+  section: "py-10 sm:py-12 lg:py-16",
+  sectionCompact: "py-8 sm:py-10 lg:py-12",
   pageX: "px-5 sm:px-8 lg:px-10",
   maxWidth: "max-w-7xl mx-auto",
   maxWidthNarrow: "max-w-4xl mx-auto",
@@ -120,6 +138,8 @@ export const spacing = {
   labelMb: "mb-4",
   touchTarget: "48px",
   touchGap: "8px",
+  bottomNav: "72px",
+  headerHeight: "72px",
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -175,7 +195,42 @@ export const animation = {
       transition: { duration: 0.6, ease },
     },
   },
+  scaleUp: {
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    transition: { duration: 0.4, ease },
+  },
   viewport: { once: true, margin: "-60px" as const },
+} as const;
+
+// ---------------------------------------------------------------------------
+// Focus
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Gradients
+// ---------------------------------------------------------------------------
+
+export const gradients = {
+  goldCta: "linear-gradient(135deg, #c9a84c, #d4b65a)",
+  goldCtaHover: "linear-gradient(135deg, #d4b65a, #c9a84c)",
+  purpleAmbient: "radial-gradient(ellipse at center top, rgba(107, 63, 160, 0.15) 0%, transparent 70%)",
+  purpleSpotlight: "radial-gradient(circle at 50% 0%, rgba(107, 63, 160, 0.2) 0%, transparent 60%)",
+  darkFade: "linear-gradient(180deg, rgba(13, 11, 18, 0) 0%, rgba(13, 11, 18, 1) 100%)",
+  cardShine: "linear-gradient(135deg, rgba(201, 168, 76, 0.05) 0%, transparent 50%, rgba(201, 168, 76, 0.03) 100%)",
+  goldLine: "linear-gradient(180deg, rgba(201, 168, 76, 0.1) 0%, #c9a84c 30%, #c9a84c 70%, rgba(201, 168, 76, 0.1) 100%)",
+} as const;
+
+// ---------------------------------------------------------------------------
+// Carousel
+// ---------------------------------------------------------------------------
+
+export const carousel = {
+  cardWidth: "280px",
+  cardWidthLg: "320px",
+  gap: "16px",
+  gapLg: "24px",
+  rowPadding: "px-5 sm:px-8 lg:px-10",
 } as const;
 
 // ---------------------------------------------------------------------------
